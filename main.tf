@@ -6,8 +6,9 @@ resource "aws_docdb_cluster" "main" {
   backup_retention_period = var.backup_retention_period
   preferred_backup_window = var.preferred_backup_window
   skip_final_snapshot     = true                        ## terraform can delete the resource created otherwise wont delete
-  db_subnet_group_name = aws_docdb_subnet_group.main.name
-  kms_key_id = data.aws_kms_key.key.arn
+  db_subnet_group_name    = aws_docdb_subnet_group.main.name
+  kms_key_id              = data.aws_kms_key.key.arn
+  storage_encrypted       = true     # by default it is false
 }
 
 ## create subnet group ids
