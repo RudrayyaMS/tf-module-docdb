@@ -15,7 +15,7 @@ resource "aws_docdb_cluster" "main" {
 ## adding cluster instance
 resource "aws_docdb_cluster_instance" "cluster_instances" {
   count              = var.no_of_instances
-  identifier         = "${var.env}-docdb-#{count.index}"
+  identifier         = "${var.env}-docdb-${count.index}"
   cluster_identifier = aws_docdb_cluster.main.id
   instance_class     = var.instance_class
 }
