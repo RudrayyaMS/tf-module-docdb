@@ -12,6 +12,14 @@ resource "aws_docdb_cluster" "main" {
   storage_encrypted       = var.storage_encrypted     # by default it is false
 }
 
+## adding cluster instance
+resource "aws_docdb_cluster_instance" "cluster_instances" {
+  count              = var.no_of_instances
+  identifier         = "${var.env}-docdb-#{count.index}"
+  cluster_identifier = aws_docdb_cluster.main.id
+  instance_class     = var.instance_class
+}
+
 ## create subnet group ids
 resource "aws_docdb_subnet_group" "main" {
   name       = "${var.env}-docdb"
